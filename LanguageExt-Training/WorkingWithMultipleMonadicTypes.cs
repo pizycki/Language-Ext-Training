@@ -6,13 +6,19 @@ using static LanguageExt.Prelude;
 
 namespace LanguageExt_Training
 {
+    /**
+     * Drawbacks:
+     * We don't know what went wrong (was it app code or api key missing)
+     * We have only two level monadic type (which is good for us).
+     */
+
     public class WorkingWithMultipleMonadicTypes
     {
         Guid PaymentId = Guid.Parse("ab8084ca-ae51-4f59-a766-63a02309d016");
         Result<Guid> StartPayment(string appCode, string apiKey) => new Result<Guid>(PaymentId);
 
         [Fact]
-        public void linq_way_and_matches()
+        public void ElTesto()
         {
             Option<string> appCode = Some("App Code");
             Option<string> apiKey = Some("API Key");
@@ -31,23 +37,6 @@ namespace LanguageExt_Training
                 .BeOfType<string>()
                 .And
                 .BeEquivalentTo(PaymentId.ToString());
-
-            /* Drawbacks:
-             * We don't know what went wrong (was it app code or api key missing)
-             * We have only two level monadic type (which is good for us).
-             */
         }
-
-        [Fact]
-        public void linqWay()
-        {
-            Option<string> appCode = Some("App Code");
-            Option<string> apiKey = Some("API Key");
-
-            app
-
-        }
-
-
     }
 }
